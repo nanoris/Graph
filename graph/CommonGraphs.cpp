@@ -1,6 +1,7 @@
 #include "CommonGraphs.hpp"
 #include "Probability.hpp"
 #include <unordered_set>
+#include <map>
 
 namespace graphs
 {
@@ -149,6 +150,57 @@ Graph Grid(int n, int m)
 
 	return G;
 }
+Graph RandomGraph(int nedges)
+{
+	if (nedges==0){
+		Graph G(1);
+
+}
+if (nedges==1){
+		Graph G(2);
+		G.add_edge(0,1)
+
+}
+	if(nedges<50)
+	{
+		int mvertex=random_int(50/random_int(2,3));
+		Graph G(mvertex);
+		G.add_edge(random_int(0,mvertex),random_int(0,mvertex),nedges);
+	}
+	else
+	{
+		for(int i=2;i++; i<100){
+			map<int i,int combinacion(i,2)> minimovertices;
+		}
+		//Buscar el que mas se acerca a nedges en minimovertices
+		//Completar sumando con las llaves de minimovertice
+		//Hacer grafo completo del valor seleccionado en minimovertice
+		//Quitar aristas hasta tener nedges
+		Graph Complete();
+	}
+	return G;
+}
+int factorial(int n)
+{
+    if(n<2)
+        return 1;
+    else
+        return n * factorial(n-1);
+}
+
+int combinacion(int n, int r)
+{
+    if(r==1)
+        return n;
+    else
+    {
+        if(n==r)
+            return 1;
+        else
+            return factorial(n) / (factorial(r) * factorial(n - r));
+    }
+}
 
 // Fill here the cycle, path, complete and random graph.
 } // namespace graphs
+
