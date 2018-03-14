@@ -2,6 +2,7 @@
 #include "Probability.hpp"
 #include <unordered_set>
 #include <map>
+#include "python3.5/Python.h"
 
 namespace graphs
 {
@@ -158,25 +159,52 @@ Graph RandomGraph(int nedges)
 }
 if (nedges==1){
 		Graph G(2);
-		G.add_edge(0,1)
+		G.add_edge(0,1);
 
 }
-	if(nedges<50)
+	if(nedges<500)
 	{
-		int mvertex=random_int(50/random_int(2,3));
+		int mvertex=random_int(0,500-(500/3));//std::random_int(2,3)
 		Graph G(mvertex);
-		G.add_edge(random_int(0,mvertex),random_int(0,mvertex),nedges);
+		;
+
+		for (int j = 0; j < G.num_vertices(); ++j)
+		{	
+			int listavertices[1000000];
+			for(int i=0;i<G.num_vertices();++i)
+				listavertices[i]=i;
+			vertex_t V1= listavertices[j];vertex_t V2= listavertices[random_int(j+1,j+2)];
+			G.add_edge(V1,V2);
+		}
+		
 	}
+
 	else
 	{
-		for(int i=2;i++; i<100){
-			map<int i,int combinacion(i,2)> minimovertices;
-		}
+		Py_Initialize();
+		PyObject *FileScript;
+	    FileScript = PyFile_FromString("script.py","r");
+	    PyRun_SimpleFile(PyFile_AsFile(FileScript),"r");
+	    PyObject *retorno, *modulo, *clase, *metodo, *argumentos, *objeto;
+	    int resultado;
+	    modulo = PyImport_ImportModule("script");
+	    clase = PyObject_GetAttrString(modulo, "minimovertice");
+	    argumentos = Py_BuildValue("ii",nedges);
+	    objeto = PyEval_CallObject(clase, argumentos);
+	    metodo = PyObject_GetAttrString(objeto, "minimovertices");
+	    argumentos = Py_BuildValue("()");
+	    retorno = PyEval_CallObject(metodo,argumentos);
+	    PyArg_Parse(retorno, "i", &resultado);
+		Py_Finalize();
+
 		//Buscar el que mas se acerca a nedges en minimovertices
 		//Completar sumando con las llaves de minimovertice
-		//Hacer grafo completo del valor seleccionado en minimovertice
+		//Hacer grafo completo del  valor seleccionado en minimovertice
 		//Quitar aristas hasta tener nedges
-		Graph Complete();
+		int retornO=retorno;
+		Graph Complete(retornO);
+		
+
 	}
 	return G;
 }
@@ -200,7 +228,23 @@ int combinacion(int n, int r)
             return factorial(n) / (factorial(r) * factorial(n - r));
     }
 }
+int desordenarlista(int lista)
+	{
+		int listarevuelta[1000000];
+		bool usado[1000000];
 
-// Fill here the cycle, path, complete and random graph.
-} // namespace graphs
+		for (int i=0; i < 1000000; i++)
+		    usado[i]=false;
 
+		int index=0;
+		for (int i=0; i < 1000000; i++){
+		    do{
+		        index = (rand() % 1000000);
+		    while (usado[index]);
+		    listarevuelta[i] = lista[index];
+		    usado[index]=true;
+		return listarevuelta;
+	}
+}
+}
+}
